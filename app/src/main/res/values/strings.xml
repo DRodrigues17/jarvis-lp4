@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Jarvis</string>
+    <string name="name">Nome do personagem</string>
+    <string name="url">Url da imagem</string>
+    <string name="description">Descrição do personagem</string>
+    <string name="age">Idade do personagem</string>
+    <string name="birthday">Dia do aniversário</string>
+    <string name="return_button">Voltar para a home</string>
+    <string name="create">criar o personagem</string>
+    <string name="crie_sua_conta">Crie sua conta</string>
+    <string name="email">email</string>
+    <string name="senha">senha</string>
+    <string name="login">Login</string>
+    <string name="nome">nome</string>
+    <string-array name="lista_editoras">
+        <item>MARVEL</item>
+        <item>DC</item>
+        <item>OUTRA</item>
+    </string-array>
+
+    <string-array name="lista_tipos">
+        <item>HERÓI</item>
+        <item>ANTI-HERÓI</item>
+        <item>VILÃO</item>
+    </string-array>
+</resources>

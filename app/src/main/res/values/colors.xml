@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="hero">#0E376F</color>
+
+    <color name="vilian">#E54B4B</color>
+    <color name="purple">#400663</color>
+    <color name="yellow">#FFBA49</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

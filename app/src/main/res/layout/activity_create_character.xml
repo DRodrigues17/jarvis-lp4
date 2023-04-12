@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".character.NewCharacterActivity">
+
+        <ImageView
+            android:id="@+id/iv_picture"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@drawable/ic_character_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/name"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_picture" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_url"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/url"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tiet_name"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/description"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tiet_url"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <Spinner
+            android:id="@+id/s_tipo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/s_editora"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tiet_description"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <Spinner
+            android:id="@+id/s_editora"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/s_tipo"
+            app:layout_constraintTop_toBottomOf="@+id/tiet_description"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_age"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/age"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/s_editora"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_birthday"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/birthday"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tiet_age"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/bt_return"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/home_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tiet_birthday" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/bt_create_character"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_new_character"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tiet_birthday" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
