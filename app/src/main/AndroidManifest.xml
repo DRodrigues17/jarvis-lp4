@@ -19,7 +19,7 @@
         <activity
             android:name=".home.MainActivity"
             android:exported="false"
-            android:parentActivityName=".login.LoginActivity"/>
+            android:parentActivityName=".login.LoginActivity" />
         <activity
             android:name=".character.CharacterActivity"
             android:exported="false" />

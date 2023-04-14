@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class CriarContaViewModel: ViewModel() {
+class CriarContaViewModel : ViewModel() {
 
     private val regex: Regex = Regex(
         "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" + "\\@"
@@ -15,7 +15,8 @@ class CriarContaViewModel: ViewModel() {
     val viewState: LiveData<ViewContaState> = state
 
     fun validarInsersoesUsuario(
-        nome: String?, email: String?, senha: String?) {
+        nome: String?, email: String?, senha: String?
+    ) {
         if (nome.isNullOrEmpty() || email.isNullOrEmpty() || senha.isNullOrEmpty()) {
             state.value = ViewContaState.MostrarErroCamposNulos
         } else if (!email.matches(regex)) {

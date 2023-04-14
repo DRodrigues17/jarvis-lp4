@@ -1,17 +1,22 @@
 package br.org.fundatec.jarvis
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import br.org.fundatec.jarvis.client.UserClient
+import br.org.fundatec.jarvis.client.UserRequest
 import br.org.fundatec.jarvis.databinding.ActivityCriarContaBinding
+import br.org.fundatec.jarvis.databinding.ActivityMainBinding
 import br.org.fundatec.jarvis.login.LoginActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class CriarContaActivity : AppCompatActivity() {
 
@@ -19,17 +24,13 @@ class CriarContaActivity : AppCompatActivity() {
 
     private val viewModel: CriarContaViewModel by viewModels()
 
-
-
-    private val moshi by lazy {
-        Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_criar_conta)
+
+        binding = ActivityCriarContaBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         configurarBotaoCriarConta()
 
@@ -49,7 +50,7 @@ class CriarContaActivity : AppCompatActivity() {
     }
 
     private fun configurarBotaoCriarConta() {
-        binding.btCreateAccount.setOnClickListener{
+        binding.btCreateAccount.setOnClickListener {
             viewModel.validarInsersoesUsuario(
                 nome = binding.etNome.text.toString(),
                 email = binding.etEmail.text.toString(),
@@ -58,8 +59,7 @@ class CriarContaActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun mostrarEmailInvalidoSnack(){
+    private fun mostrarEmailInvalidoSnack() {
         val container = findViewById<ConstraintLayout>(R.id.container)
         Snackbar
             .make(container, "Email invalido", Snackbar.LENGTH_LONG)
@@ -75,13 +75,17 @@ class CriarContaActivity : AppCompatActivity() {
 
     private fun casoDeSucesso() {
 
-        val preferences = getPreferences(MODE_PRIVATE)
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://fundatec.herokuapp.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
-        val usuarioIdString = moshi
-            .adapter(String::class.java)
-            .toJson(criarUser().id.toString())
+        val api = retrofit.create(UserClient::class.java)
 
-        preferences.edit().putString("User", usuarioIdString).apply()
+        GlobalScope.launch {
+            val response = api.createUser(criarUser())
+            println(response.toString())
+        }
 
 
         val container = findViewById<ConstraintLayout>(R.id.container)
@@ -94,18 +98,11 @@ class CriarContaActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun criarUser(): User {
+    private fun criarUser(): UserRequest {
         val nome = findViewById<TextInputEditText>(R.id.et_nome).toString()
         val email = findViewById<TextInputEditText>(R.id.et_email).toString()
         val senha = findViewById<TextInputEditText>(R.id.et_senha).toString()
 
-        return User(null , nome, email, senha)
+        return UserRequest(nome, email, senha)
     }
 }
-
-  data class User(
-      val id: Number?,
-      val name: String,
-      val email: String,
-      val senha: String
-  )

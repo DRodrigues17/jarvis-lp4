@@ -12,6 +12,7 @@
     <string name="senha">senha</string>
     <string name="login">Login</string>
     <string name="nome">nome</string>
+    <string name="preference_file_key">br.org.fundatec.jarvis.PREFERENCE_FILE_KEY</string>
     <string-array name="lista_editoras">
         <item>MARVEL</item>
         <item>DC</item>
