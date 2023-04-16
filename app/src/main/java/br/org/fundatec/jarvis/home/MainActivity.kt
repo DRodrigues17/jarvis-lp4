@@ -8,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import br.org.fundatec.jarvis.R
 import br.org.fundatec.jarvis.character.CreateCharacterActivity
 import br.org.fundatec.jarvis.client.CharacterClient
+import br.org.fundatec.jarvis.data.TabCharacter
 import br.org.fundatec.jarvis.databinding.ActivityMainBinding
+import br.org.fundatec.jarvis.tab.TabPagerAdapter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -24,6 +26,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
+        configurarTabLayout()
+
         preferences = getSharedPreferences("bd", MODE_PRIVATE)
         Log.e("user id", preferences.getInt("id", 0).toString())
 
@@ -36,16 +44,26 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch {
             val response = api.getCharacters(preferences.getInt("id", 0))
-            println(response.toString())
+            Log.e("corpo de response", response.toString())
         }
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
 
         binding.fbNewCharacter.setOnClickListener {
             val navegateToNewCharacterActivity = Intent(this, CreateCharacterActivity::class.java)
             startActivity(navegateToNewCharacterActivity)
         }
+    }
+    private fun configurarTabLayout(){
+        val viewPager = binding.viewPager
+        val tabLayout = binding.tabLayout
+
+//        val tabCharacters = listOf(
+//            TabCharacter("Herois", Fragment1()),
+//            TabCharacter("Vilões", Fragment2())
+//        )
+//
+//        val adapter = TabPagerAdapter(supportFragmentManager, tabCharacters)
+//        viewPager.adapter = adapter
+//
+//        tabLayout.setupWithViewPager(viewPager)
     }
 }

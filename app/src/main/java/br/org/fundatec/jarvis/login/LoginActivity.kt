@@ -30,7 +30,6 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
@@ -91,14 +90,13 @@ class LoginActivity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             val userRequest: UserRequest = pegarDadosInputUser()
 
-            val response = api.getUser(userRequest.password, userRequest.email)
+            val response = api.getUser("d", "d")
 
             val container = binding.container
 
             preferences.edit().putInt("id", response.id).apply()
 
             println("id do usuario $response")
-
 
 
             Snackbar

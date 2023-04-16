@@ -4,6 +4,7 @@ import android.R
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.activity.viewModels
@@ -19,8 +20,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.text.SimpleDateFormat
-import java.util.*
 
 class CreateCharacterActivity : AppCompatActivity() {
 
@@ -80,7 +79,7 @@ class CreateCharacterActivity : AppCompatActivity() {
 
         GlobalScope.launch {
             val response = api.createCharacter(preferences.getInt("id", 0), pegarPersonagemInput())
-            println(response.toString())
+            Log.e("corpo de response", response.toString())
 
             Snackbar.make(container, "personagem cadastrado com sucesso", Snackbar.LENGTH_LONG)
                 .show()
@@ -90,25 +89,21 @@ class CreateCharacterActivity : AppCompatActivity() {
     private fun pegarPersonagemInput(): Character {
 
         val name = binding.tietName.text.toString()
-        val imageLink = binding.tietUrl.toString()
         val description = binding.tietDescription.text.toString()
-        val editora = binding.sEditora.getSelectedItem()
-        val type = binding.sTipo.getSelectedItem()
+        val imageLink = binding.tietUrl.text.toString()
+        val editora = binding.sEditora.selectedItem
+        val type = binding.sTipo.selectedItem
         val age = binding.tietAge.text.toString()
-        var date = binding.tietBirthday.text.toString()
-
-        val formatter = SimpleDateFormat("dd/MM/yyyy");
-
-        val formattedDate: Date? = formatter.parse(date)
+        val date = binding.tietBirthday.text.toString()
 
         return Character(
             name,
-            imageLink,
             description,
+            imageLink,
             editora.toString(),
             type.toString(),
             age.toInt(),
-            formattedDate.toString()
+            date
         )
     }
 
@@ -118,9 +113,9 @@ class CreateCharacterActivity : AppCompatActivity() {
                 nome = binding.tietName.text.toString(),
                 descricao = binding.tietDescription.text.toString(),
                 idade = binding.tietAge.text.toString(),
-                link = binding.tietUrl.toString(),
-                editora = binding.sEditora.getSelectedItem().toString(),
-                tipo = binding.sTipo.getSelectedItem().toString()
+                link = binding.tietUrl.text.toString(),
+                editora = binding.sEditora.selectedItem.toString(),
+                tipo = binding.sTipo.selectedItem.toString()
             )
         }
     }
