@@ -7,9 +7,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import br.org.fundatec.jarvis.R
 import br.org.fundatec.jarvis.character.CreateCharacterActivity
-import br.org.fundatec.jarvis.client.UserClient
+import br.org.fundatec.jarvis.client.CharacterClient
 import br.org.fundatec.jarvis.databinding.ActivityMainBinding
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -29,22 +28,22 @@ class MainActivity : AppCompatActivity() {
         Log.e("user id", preferences.getInt("id", 0).toString())
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://fundatec.herokuapp.com//api/login/")
+            .baseUrl("https://fundatec.herokuapp.com//api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        val api = retrofit.create(UserClient::class.java)
+        val api = retrofit.create(CharacterClient::class.java)
 
         GlobalScope.launch {
-            //val response = api.getUser()
-            //println(response.toString())
+            val response = api.getCharacters(preferences.getInt("id", 0))
+            println(response.toString())
         }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        findViewById<FloatingActionButton>(R.id.fb_new_character).setOnClickListener {
+        binding.fbNewCharacter.setOnClickListener {
             val navegateToNewCharacterActivity = Intent(this, CreateCharacterActivity::class.java)
             startActivity(navegateToNewCharacterActivity)
         }

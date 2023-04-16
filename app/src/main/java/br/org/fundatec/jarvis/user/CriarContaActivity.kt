@@ -5,9 +5,10 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import br.org.fundatec.jarvis.client.UserClient
-import br.org.fundatec.jarvis.client.UserRequest
 import br.org.fundatec.jarvis.databinding.ActivityCriarContaBinding
 import br.org.fundatec.jarvis.login.LoginActivity
+import br.org.fundatec.jarvis.data.UserRequest
+import br.org.fundatec.jarvis.sealed.ViewContaState
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -67,7 +68,7 @@ class CriarContaActivity : AppCompatActivity() {
     private fun casoDeSucesso() {
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://fundatec.herokuapp.com/")
+            .baseUrl("https://fundatec.herokuapp.com//api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

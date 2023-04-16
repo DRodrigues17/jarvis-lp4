@@ -3,15 +3,18 @@ package br.org.fundatec.jarvis.login
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import br.org.fundatec.jarvis.CriarContaActivity
 import br.org.fundatec.jarvis.R
 import br.org.fundatec.jarvis.client.UserClient
-import br.org.fundatec.jarvis.client.UserRequest
+import br.org.fundatec.jarvis.data.UserRequest
 import br.org.fundatec.jarvis.databinding.ActivityLoginBinding
 import br.org.fundatec.jarvis.home.MainActivity
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -23,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
 
     private val viewModel: LoginViewModel by viewModels()
 
-    private  lateinit var preferences: SharedPreferences
+    private lateinit var preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,13 +78,17 @@ class LoginActivity : AppCompatActivity() {
         val navigateToMainActivity = Intent(this, MainActivity::class.java)
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://fundatec.herokuapp.com/")
+            .baseUrl("https://fundatec.herokuapp.com/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         val api = retrofit.create(UserClient::class.java)
 
-        GlobalScope.launch {
+        val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
+            Log.e("API Call Error", "API call failed: ${throwable.message}", throwable)
+        }
+
+        GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             val userRequest: UserRequest = pegarDadosInputUser()
 
             val response = api.getUser(userRequest.password, userRequest.email)
@@ -90,7 +97,9 @@ class LoginActivity : AppCompatActivity() {
 
             preferences.edit().putInt("id", response.id).apply()
 
-            println(response.toString())
+            println("id do usuario $response")
+
+
 
             Snackbar
                 .make(container, "login realizado com sucesso", Snackbar.LENGTH_LONG)
@@ -105,6 +114,9 @@ class LoginActivity : AppCompatActivity() {
 
         val email = binding.etEmail.text.toString()
         val senha = binding.etPassword.text.toString()
+
+        Log.e("email do login", email)
+        Log.e("senha do login", senha)
 
         return UserRequest(" ", email, senha)
 
