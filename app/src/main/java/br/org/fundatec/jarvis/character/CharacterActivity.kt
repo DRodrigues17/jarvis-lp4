@@ -16,8 +16,7 @@ class CharacterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_personagem)
 
         binding = ActivityPersonagemBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
 
         binding.btReturnHome.setOnClickListener {

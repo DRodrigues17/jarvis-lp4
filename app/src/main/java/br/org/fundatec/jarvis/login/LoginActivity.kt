@@ -32,8 +32,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
         preferences = getSharedPreferences("bd", MODE_PRIVATE)
 
@@ -42,8 +41,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.viewState.observe(this) { state ->
             when (state) {
                 is ViewLoginState.MostrarErroCamposNulos -> mostrarCamposNulosSnack()
-                ViewLoginState.MostrarCasoDeSucesso -> casoDeSucesso()
-                else -> {}
+                is ViewLoginState.MostrarCasoDeSucesso -> casoDeSucesso()
             }
         }
 

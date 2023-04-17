@@ -12,4 +12,7 @@
     <string name="senha">senha</string>
     <string name="login">Login</string>
     <string name="nome">nome</string>
+    <string name="meus_personagens">Meus Personagens</string>
+    <string name="mensagem_de_erro">O tipo de personagem é nulo</string>
+    <string name="erro_api">aconteceu algum erro na API</string>
 </resources>

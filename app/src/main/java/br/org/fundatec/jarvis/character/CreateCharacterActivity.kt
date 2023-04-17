@@ -10,11 +10,11 @@ import android.widget.Spinner
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import br.org.fundatec.jarvis.character.presentation.CreateCharacterViewModel
-import br.org.fundatec.jarvis.client.CharacterClient
+import br.org.fundatec.jarvis.character.data.api.CharacterClient
 import br.org.fundatec.jarvis.data.Character
 import br.org.fundatec.jarvis.databinding.ActivityCreateCharacterBinding
 import br.org.fundatec.jarvis.home.MainActivity
-import br.org.fundatec.jarvis.sealed.ViewCharacterState
+import br.org.fundatec.jarvis.sealed.CreateCharacterViewState
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -34,8 +34,7 @@ class CreateCharacterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityCreateCharacterBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
         preferences = getSharedPreferences("bd", MODE_PRIVATE)
 
@@ -50,9 +49,8 @@ class CreateCharacterActivity : AppCompatActivity() {
 
         viewModel.viewState.observe(this) { state ->
             when (state) {
-                is ViewCharacterState.MostrarErroCamposNulos -> mostrarCamposNulosSnack()
-                ViewCharacterState.MostarCasoDeSucesso -> casoDeSucesso()
-                else -> {}
+                is CreateCharacterViewState.MostrarErroCamposNulos -> mostrarCamposNulosSnack()
+                is CreateCharacterViewState.MostarCasoDeSucesso -> casoDeSucesso()
             }
         }
 

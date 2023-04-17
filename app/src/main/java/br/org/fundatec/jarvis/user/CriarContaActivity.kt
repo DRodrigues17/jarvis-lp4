@@ -8,7 +8,7 @@ import br.org.fundatec.jarvis.client.UserClient
 import br.org.fundatec.jarvis.databinding.ActivityCriarContaBinding
 import br.org.fundatec.jarvis.login.LoginActivity
 import br.org.fundatec.jarvis.data.UserRequest
-import br.org.fundatec.jarvis.sealed.ViewContaState
+import br.org.fundatec.jarvis.sealed.ContaViewState
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -26,15 +26,14 @@ class CriarContaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_criar_conta)
 
         binding = ActivityCriarContaBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
         passarInformacoesParaViewModelValidar()
 
         viewModel.viewState.observe(this) { state ->
             when (state) {
-                is ViewContaState.MostrarErroCamposNulos -> mostrarCamposNulosSnack()
-                ViewContaState.MostrarCasoDeSucesso -> casoDeSucesso()
+                is ContaViewState.MostrarErroCamposNulos -> mostrarCamposNulosSnack()
+                ContaViewState.MostrarCasoDeSucesso -> casoDeSucesso()
                 else -> {}
             }
         }

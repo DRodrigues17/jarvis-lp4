@@ -3,11 +3,11 @@ package br.org.fundatec.jarvis.character.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import br.org.fundatec.jarvis.sealed.ViewCharacterState
+import br.org.fundatec.jarvis.sealed.CreateCharacterViewState
 
 class CreateCharacterViewModel : ViewModel() {
-    private val state = MutableLiveData<ViewCharacterState>()
-    val viewState: LiveData<ViewCharacterState> = state
+    private val state = MutableLiveData<CreateCharacterViewState>()
+    val viewState: LiveData<CreateCharacterViewState> = state
 
     fun validarInputs(
         nome: String?,
@@ -21,9 +21,9 @@ class CreateCharacterViewModel : ViewModel() {
                 .isEmpty() || link.toString().isEmpty() || editora.toString().isEmpty() ||
             tipo.toString().isEmpty()
         ) {
-            state.value = ViewCharacterState.MostrarErroCamposNulos
+            state.value = CreateCharacterViewState.MostrarErroCamposNulos
         } else {
-            state.value = ViewCharacterState.MostarCasoDeSucesso
+            state.value = CreateCharacterViewState.MostarCasoDeSucesso
         }
     }
 }
