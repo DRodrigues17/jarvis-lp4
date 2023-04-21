@@ -88,14 +88,13 @@ class LoginActivity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             val userRequest: UserRequest = pegarDadosInputUser()
 
-            val response = api.getUser("d", "d")
+            val response = api.getUser(userRequest.password, userRequest.email)
 
             val container = binding.container
 
             preferences.edit().putInt("id", response.id).apply()
 
             println("id do usuario $response")
-
 
             Snackbar
                 .make(container, "login realizado com sucesso", Snackbar.LENGTH_LONG)

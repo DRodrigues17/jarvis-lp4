@@ -11,8 +11,8 @@
 
         <ImageView
             android:id="@+id/iv_picture"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:src="@drawable/ic_character_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -24,6 +24,10 @@
             android:layout_height="wrap_content"
             android:hint="@string/name"
             android:textAlignment="center"
+            android:inputType="text"
+            android:imeOptions="actionGo"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_picture" />
@@ -34,6 +38,10 @@
             android:layout_height="wrap_content"
             android:hint="@string/url"
             android:textAlignment="center"
+            android:inputType="text"
+            android:imeOptions="actionGo"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tiet_name" />
@@ -44,6 +52,10 @@
             android:layout_height="wrap_content"
             android:hint="@string/description"
             android:textAlignment="center"
+            android:inputType="text"
+            android:imeOptions="actionGo"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tiet_url"
@@ -53,6 +65,7 @@
             android:id="@+id/s_tipo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             app:layout_constraintEnd_toStartOf="@id/s_editora"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tiet_description"
@@ -62,6 +75,7 @@
             android:id="@+id/s_editora"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/s_tipo"
             app:layout_constraintTop_toBottomOf="@+id/tiet_description"
@@ -74,6 +88,8 @@
             android:hint="@string/age"
             android:textAlignment="center"
             android:inputType="number"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/s_editora"
@@ -84,8 +100,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="date"
+            android:imeOptions="actionGo"
             android:hint="@string/birthday"
             android:textAlignment="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tiet_age"
@@ -98,7 +117,8 @@
             android:src="@drawable/home_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tiet_birthday" />
+            app:layout_constraintTop_toBottomOf="@+id/tiet_birthday"
+            android:layout_marginStart="20dp"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/bt_create_character"
@@ -107,7 +127,8 @@
             android:src="@drawable/ic_new_character"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tiet_birthday" />
+            app:layout_constraintTop_toBottomOf="@+id/tiet_birthday"
+            android:layout_marginEnd="20dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

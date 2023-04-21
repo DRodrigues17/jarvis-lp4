@@ -41,7 +41,7 @@ class CharacterRemoteDataSource {
                     Result.Error(CharacterErrorModel.ErrorAoSalvar)
                 }
             } catch (ex: Exception) {
-                Log.e("erro ao pegar personagens ", ex.message ?: "")
+                Log.e("erro ao criar peronagem ", ex.message ?: "")
                 Result.Error(CharacterErrorModel.ErrorAoSalvar)
             }
         }
